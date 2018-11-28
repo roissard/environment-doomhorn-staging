@@ -12,3 +12,20 @@ cleanup:
   Annotations:
     helm.sh/hook: pre-delete
     helm.sh/hook-delete-policy: hook-succeeded
+expose:
+  config:
+    domain: 35.233.91.122.nip.io
+    exposer: Ingress
+    http: "true"
+  Annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-delete-policy: hook-succeeded
+jenkins:
+  Servers:
+    Gitea:
+    - Name: gitea
+      Url: http://gitea-gitea.jx.35.233.91.122.nip.io
+      Credential: jenkins-x-git
+    Global:
+      EnvVars:
+        TILLER_NAMESPACE: kube-system
